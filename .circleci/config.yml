@@ -11,11 +11,7 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          key: dependency-cache-app{{ checksum "package.json" }}
-      - restore_cache:
           key: dependency-cache-npm{{ checksum "package.json" }}
-      - restore_cache:
-          key: dependency-cache-cache{{ checksum "package.json" }}
       - run:
           name: set log level
           command: npm config set loglevel warn
@@ -26,17 +22,9 @@ jobs:
           name: npm run ensure-env
           command: npm run ensure-env
       - save_cache:
-          key: dependency-cache-app{{ checksum "package.json" }}
-          paths:
-            - ~/app
-      - save_cache:
           key: dependency-cache-npm{{ checksum "package.json" }}
           paths:
             - ~/.npm
-      - save_cache:
-          key: dependency-cache-cache{{ checksum "package.json" }}
-          paths:
-            - ~/.cache
       - persist_to_workspace:
           root: ~/
           paths:
@@ -46,15 +34,9 @@ jobs:
     working_directory: ~/app
     docker:
       - image: circleci/node:lts
-    environment:
-      NO_UPDATE_NOTIFIER: 1
-      NODE_NO_WARNINGS: 1
     steps:
       - attach_workspace:
           at: ~/
-      - run:
-          name: set log level
-          command: npm config set loglevel warn
       - run:
           name: lint
           command: npm run lint
@@ -63,18 +45,9 @@ jobs:
     working_directory: ~/app
     docker:
       - image: circleci/node:lts
-    environment:
-      NO_UPDATE_NOTIFIER: 1
-      NODE_NO_WARNINGS: 1
     steps:
       - attach_workspace:
-          at: ~/
-      - run:
-          name: set log level
-          command: npm config set loglevel warn
-      - run:
-          name: npm run ensure-env
-          command: npm run ensure-env          
+          at: ~/         
       - run:
           name: test
           command: npm test
