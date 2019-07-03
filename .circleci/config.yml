@@ -20,8 +20,8 @@ jobs:
           name: npm ci
           command: npm ci
       - run:
-          name: npm run ensure-dev
-          command: npm run ensure-dev
+          name: npm run ensure-env
+          command: npm run ensure-env
       - save_cache:
           key: dependency-cache-app{{ checksum "package.json" }}
           paths:
