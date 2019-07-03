@@ -50,6 +50,9 @@ jobs:
       - attach_workspace:
           at: ~/
       - run:
+          name: set log level
+          command: npm config set loglevel warn
+      - run:
           name: lint
           command: npm run lint
           
@@ -60,6 +63,9 @@ jobs:
     steps:
       - attach_workspace:
           at: ~/
+      - run:
+          name: set log level
+          command: npm config set loglevel warn
       - run:
           name: test
           command: npm test
