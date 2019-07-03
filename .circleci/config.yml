@@ -73,6 +73,9 @@ jobs:
           name: set log level
           command: npm config set loglevel warn
       - run:
+          name: npm run ensure-env
+          command: npm run ensure-env          
+      - run:
           name: test
           command: npm test
         
