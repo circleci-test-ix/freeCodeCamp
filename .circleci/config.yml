@@ -46,6 +46,9 @@ jobs:
     working_directory: ~/app
     docker:
       - image: circleci/node:lts
+    environment:
+      NO_UPDATE_NOTIFIER: 1
+      NODE_NO_WARNINGS: 1
     steps:
       - attach_workspace:
           at: ~/
@@ -60,6 +63,9 @@ jobs:
     working_directory: ~/app
     docker:
       - image: circleci/node:lts
+    environment:
+      NO_UPDATE_NOTIFIER: 1
+      NODE_NO_WARNINGS: 1
     steps:
       - attach_workspace:
           at: ~/
